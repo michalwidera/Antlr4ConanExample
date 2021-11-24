@@ -1,4 +1,4 @@
-# Antlr4ConanExample
+# ANTLR4ConanExample
 
 This is Example of ANTLR4-cppruntime usage.
 Please note that usage of Conan Package manager solves dependency issues in different build environments.
