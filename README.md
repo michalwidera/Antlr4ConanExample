@@ -11,6 +11,8 @@ Here is code snippets that build working parser on your platform.
 
 ## Build example ANTLR4 parser in C++ type:
 
+(assuming Gcc (or Similar) toolchain is already installed.)
+
 ~~~
 pip install conan
 git clone https://github.com/michalwidera/Antlr4ConanExample
@@ -24,7 +26,7 @@ a4test
 
 ## Regenerate grammar form .g4 file
 
-(Assumed that build step have been already done.)
+(Assumed that build step have been already done and Java is already installed.)
 
 ~~~
 cd Antlr4ConanExample/Src
