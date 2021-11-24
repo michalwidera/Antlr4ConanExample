@@ -5,7 +5,7 @@ class AntLR4Example(ConanFile):
     requires = ["cmake/3.21.3"]
     license = "MIT"
     author = "Michal Widera"
-    description = "AntLR4 example"
+    description = "ANTLR4 example"
     homepage = "https://github.com/michalwidera/Antlr4ConanExample"
     generators = "cmake" , "cmake_find_package"
     testing = []
