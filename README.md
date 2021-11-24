@@ -1,9 +1,9 @@
 # Antlr4ConanExample
 
-This is Example of Antlr4-cppruntime usage.
+This is Example of ANTLR4-cppruntime usage.
 Please note that usage of Conan Package manager solves dependency issues in different build environments.
 
-## Build example AntLR4 parser in C++ type:
+## Build example ANTLR4 parser in C++ type:
 
 ~~~
 pip install conan
