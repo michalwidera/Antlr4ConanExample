@@ -16,7 +16,7 @@ conan build ..
 a4test
 ~~~
 
-## Regenrate grammar form .g4 file
+## Regenerate grammar form .g4 file
 
 (Assumed that build step have been already done.)
 
