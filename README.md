@@ -1,11 +1,14 @@
 # Antlr4ConanExample
-Example of Antlr4-cppruntime usage.
 
-## To build example AntLR4 parser in C++ type:
+This is Example of Antlr4-cppruntime usage.
+Please note that usage of Conan Package manager solves dependency issues in different build environments.
+
+## Build example AntLR4 parser in C++ type:
 
 ~~~
 pip install conan
-source antlr4-env.sh
+git clone https://github.com/michalwidera/Antlr4ConanExample
+cd Antlr4ConanExample
 mkdir build
 cd build
 conan install ..
@@ -13,11 +16,12 @@ conan build ..
 a4test
 ~~~
 
-## To regenrate grammar form .g4 file
+## Regenrate grammar form .g4 file
+
+(Assumed that build step have been already done.)
 
 ~~~
-source antlr4-env.sh
-cd Src
+cd Antlr4ConanExample/Src
 source regenerate_parser.sh
 cd ../build
 conan build ..
