@@ -24,6 +24,12 @@ conan build ..
 a4test
 ~~~
 
+If you are using first time conan please use:
+~~~
+conan profile new default --detect
+~~~
+To create and fill default conan profile.
+
 ## Regenerate grammar form .g4 file
 
 (Assumed that build step have been already done and Java is already installed.)
