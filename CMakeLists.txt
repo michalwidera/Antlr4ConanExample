@@ -16,6 +16,6 @@ add_executable( a4test ${SOURCES_STAGE} )
 
 target_link_libraries( a4test ${CONAN_LIBS} )
 
-set_target_properties(a4test PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED ON)
+set_target_properties(a4test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 
 install(TARGETS a4test DESTINATION ~/.local/bin)
