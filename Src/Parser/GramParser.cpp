@@ -1,5 +1,5 @@
 
-// Generated from Gram.g4 by ANTLR 4.9.3
+// Generated from Gram.g4 by ANTLR 4.10.1
 
 
 
@@ -7,14 +7,90 @@
 
 
 using namespace antlrcpp;
+
 using namespace antlr4;
 
-GramParser::GramParser(TokenStream *input) : Parser(input) {
-  _interpreter = new atn::ParserATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);
+namespace {
+
+struct GramParserStaticData final {
+  GramParserStaticData(std::vector<std::string> ruleNames,
+                        std::vector<std::string> literalNames,
+                        std::vector<std::string> symbolicNames)
+      : ruleNames(std::move(ruleNames)), literalNames(std::move(literalNames)),
+        symbolicNames(std::move(symbolicNames)),
+        vocabulary(this->literalNames, this->symbolicNames) {}
+
+  GramParserStaticData(const GramParserStaticData&) = delete;
+  GramParserStaticData(GramParserStaticData&&) = delete;
+  GramParserStaticData& operator=(const GramParserStaticData&) = delete;
+  GramParserStaticData& operator=(GramParserStaticData&&) = delete;
+
+  std::vector<antlr4::dfa::DFA> decisionToDFA;
+  antlr4::atn::PredictionContextCache sharedContextCache;
+  const std::vector<std::string> ruleNames;
+  const std::vector<std::string> literalNames;
+  const std::vector<std::string> symbolicNames;
+  const antlr4::dfa::Vocabulary vocabulary;
+  antlr4::atn::SerializedATNView serializedATN;
+  std::unique_ptr<antlr4::atn::ATN> atn;
+};
+
+std::once_flag gramParserOnceFlag;
+GramParserStaticData *gramParserStaticData = nullptr;
+
+void gramParserInitialize() {
+  assert(gramParserStaticData == nullptr);
+  auto staticData = std::make_unique<GramParserStaticData>(
+    std::vector<std::string>{
+      "prog", "expr"
+    },
+    std::vector<std::string>{
+      "", "'*'", "'/'", "'+'", "'-'", "'('", "')'"
+    },
+    std::vector<std::string>{
+      "", "", "", "", "", "", "", "NEWLINE", "INT"
+    }
+  );
+  static const int32_t serializedATNSegment[] = {
+  	4,1,8,32,2,0,7,0,2,1,7,1,1,0,1,0,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,1,1,
+  	1,1,1,1,1,1,1,1,1,3,1,19,8,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,27,8,1,10,1,
+  	12,1,30,9,1,1,1,0,1,2,2,0,2,0,2,1,0,1,2,1,0,3,4,33,0,9,1,0,0,0,2,18,1,
+  	0,0,0,4,5,3,2,1,0,5,6,5,7,0,0,6,8,1,0,0,0,7,4,1,0,0,0,8,11,1,0,0,0,9,
+  	7,1,0,0,0,9,10,1,0,0,0,10,1,1,0,0,0,11,9,1,0,0,0,12,13,6,1,-1,0,13,19,
+  	5,8,0,0,14,15,5,5,0,0,15,16,3,2,1,0,16,17,5,6,0,0,17,19,1,0,0,0,18,12,
+  	1,0,0,0,18,14,1,0,0,0,19,28,1,0,0,0,20,21,10,4,0,0,21,22,7,0,0,0,22,27,
+  	3,2,1,5,23,24,10,3,0,0,24,25,7,1,0,0,25,27,3,2,1,4,26,20,1,0,0,0,26,23,
+  	1,0,0,0,27,30,1,0,0,0,28,26,1,0,0,0,28,29,1,0,0,0,29,3,1,0,0,0,30,28,
+  	1,0,0,0,4,9,18,26,28
+  };
+  staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
+
+  antlr4::atn::ATNDeserializer deserializer;
+  staticData->atn = deserializer.deserialize(staticData->serializedATN);
+
+  const size_t count = staticData->atn->getNumberOfDecisions();
+  staticData->decisionToDFA.reserve(count);
+  for (size_t i = 0; i < count; i++) { 
+    staticData->decisionToDFA.emplace_back(staticData->atn->getDecisionState(i), i);
+  }
+  gramParserStaticData = staticData.release();
+}
+
+}
+
+GramParser::GramParser(TokenStream *input) : GramParser(input, antlr4::atn::ParserATNSimulatorOptions()) {}
+
+GramParser::GramParser(TokenStream *input, const antlr4::atn::ParserATNSimulatorOptions &options) : Parser(input) {
+  GramParser::initialize();
+  _interpreter = new atn::ParserATNSimulator(this, *gramParserStaticData->atn, gramParserStaticData->decisionToDFA, gramParserStaticData->sharedContextCache, options);
 }
 
 GramParser::~GramParser() {
   delete _interpreter;
+}
+
+const atn::ATN& GramParser::getATN() const {
+  return *gramParserStaticData->atn;
 }
 
 std::string GramParser::getGrammarFileName() const {
@@ -22,11 +98,15 @@ std::string GramParser::getGrammarFileName() const {
 }
 
 const std::vector<std::string>& GramParser::getRuleNames() const {
-  return _ruleNames;
+  return gramParserStaticData->ruleNames;
 }
 
-dfa::Vocabulary& GramParser::getVocabulary() const {
-  return _vocabulary;
+const dfa::Vocabulary& GramParser::getVocabulary() const {
+  return gramParserStaticData->vocabulary;
+}
+
+antlr4::atn::SerializedATNView GramParser::getSerializedATN() const {
+  return gramParserStaticData->serializedATN;
 }
 
 
@@ -263,83 +343,6 @@ bool GramParser::exprSempred(ExprContext *_localctx, size_t predicateIndex) {
   return true;
 }
 
-// Static vars and initialization.
-std::vector<dfa::DFA> GramParser::_decisionToDFA;
-atn::PredictionContextCache GramParser::_sharedContextCache;
-
-// We own the ATN which in turn owns the ATN states.
-atn::ATN GramParser::_atn;
-std::vector<uint16_t> GramParser::_serializedATN;
-
-std::vector<std::string> GramParser::_ruleNames = {
-  "prog", "expr"
-};
-
-std::vector<std::string> GramParser::_literalNames = {
-  "", "'*'", "'/'", "'+'", "'-'", "'('", "')'"
-};
-
-std::vector<std::string> GramParser::_symbolicNames = {
-  "", "", "", "", "", "", "", "NEWLINE", "INT"
-};
-
-dfa::Vocabulary GramParser::_vocabulary(_literalNames, _symbolicNames);
-
-std::vector<std::string> GramParser::_tokenNames;
-
-GramParser::Initializer::Initializer() {
-	for (size_t i = 0; i < _symbolicNames.size(); ++i) {
-		std::string name = _vocabulary.getLiteralName(i);
-		if (name.empty()) {
-			name = _vocabulary.getSymbolicName(i);
-		}
-
-		if (name.empty()) {
-			_tokenNames.push_back("<INVALID>");
-		} else {
-      _tokenNames.push_back(name);
-    }
-	}
-
-  static const uint16_t serializedATNSegment0[] = {
-    0x3, 0x608b, 0xa72a, 0x8133, 0xb9ed, 0x417c, 0x3be7, 0x7786, 0x5964, 
-       0x3, 0xa, 0x22, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x3, 0x2, 
-       0x3, 0x2, 0x3, 0x2, 0x7, 0x2, 0xa, 0xa, 0x2, 0xc, 0x2, 0xe, 0x2, 
-       0xd, 0xb, 0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 
-       0x3, 0x3, 0x5, 0x3, 0x15, 0xa, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 
-       0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x7, 0x3, 0x1d, 0xa, 0x3, 0xc, 0x3, 
-       0xe, 0x3, 0x20, 0xb, 0x3, 0x3, 0x3, 0x2, 0x3, 0x4, 0x4, 0x2, 0x4, 
-       0x2, 0x4, 0x3, 0x2, 0x3, 0x4, 0x3, 0x2, 0x5, 0x6, 0x2, 0x23, 0x2, 
-       0xb, 0x3, 0x2, 0x2, 0x2, 0x4, 0x14, 0x3, 0x2, 0x2, 0x2, 0x6, 0x7, 
-       0x5, 0x4, 0x3, 0x2, 0x7, 0x8, 0x7, 0x9, 0x2, 0x2, 0x8, 0xa, 0x3, 
-       0x2, 0x2, 0x2, 0x9, 0x6, 0x3, 0x2, 0x2, 0x2, 0xa, 0xd, 0x3, 0x2, 
-       0x2, 0x2, 0xb, 0x9, 0x3, 0x2, 0x2, 0x2, 0xb, 0xc, 0x3, 0x2, 0x2, 
-       0x2, 0xc, 0x3, 0x3, 0x2, 0x2, 0x2, 0xd, 0xb, 0x3, 0x2, 0x2, 0x2, 
-       0xe, 0xf, 0x8, 0x3, 0x1, 0x2, 0xf, 0x15, 0x7, 0xa, 0x2, 0x2, 0x10, 
-       0x11, 0x7, 0x7, 0x2, 0x2, 0x11, 0x12, 0x5, 0x4, 0x3, 0x2, 0x12, 0x13, 
-       0x7, 0x8, 0x2, 0x2, 0x13, 0x15, 0x3, 0x2, 0x2, 0x2, 0x14, 0xe, 0x3, 
-       0x2, 0x2, 0x2, 0x14, 0x10, 0x3, 0x2, 0x2, 0x2, 0x15, 0x1e, 0x3, 0x2, 
-       0x2, 0x2, 0x16, 0x17, 0xc, 0x6, 0x2, 0x2, 0x17, 0x18, 0x9, 0x2, 0x2, 
-       0x2, 0x18, 0x1d, 0x5, 0x4, 0x3, 0x7, 0x19, 0x1a, 0xc, 0x5, 0x2, 0x2, 
-       0x1a, 0x1b, 0x9, 0x3, 0x2, 0x2, 0x1b, 0x1d, 0x5, 0x4, 0x3, 0x6, 0x1c, 
-       0x16, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x19, 0x3, 0x2, 0x2, 0x2, 0x1d, 0x20, 
-       0x3, 0x2, 0x2, 0x2, 0x1e, 0x1c, 0x3, 0x2, 0x2, 0x2, 0x1e, 0x1f, 0x3, 
-       0x2, 0x2, 0x2, 0x1f, 0x5, 0x3, 0x2, 0x2, 0x2, 0x20, 0x1e, 0x3, 0x2, 
-       0x2, 0x2, 0x6, 0xb, 0x14, 0x1c, 0x1e, 
-  };
-
-  _serializedATN.insert(_serializedATN.end(), serializedATNSegment0,
-    serializedATNSegment0 + sizeof(serializedATNSegment0) / sizeof(serializedATNSegment0[0]));
-
-
-  atn::ATNDeserializer deserializer;
-  _atn = deserializer.deserialize(_serializedATN);
-
-  size_t count = _atn.getNumberOfDecisions();
-  _decisionToDFA.reserve(count);
-  for (size_t i = 0; i < count; i++) { 
-    _decisionToDFA.emplace_back(_atn.getDecisionState(i), i);
-  }
+void GramParser::initialize() {
+  std::call_once(gramParserOnceFlag, gramParserInitialize);
 }
-
-GramParser::Initializer GramParser::_init;

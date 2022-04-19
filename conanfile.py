@@ -38,6 +38,9 @@ class AntLR4Example(ConanFile):
         self.settings.compiler.cppstd = 20
         self.settings.compiler.libcxx = "libstdc++11"
 
+    def package_info(self):
+        self.cpp_info.system_libs = ["dl", "rt", "pthread"]
+
     def requirements(self):
         antlr4_version_file = open("../Src/regenerate_parser.sh","w")
         antlr4_version_file.write(script.replace('VERSION',str(self.options.antlr4)))

@@ -14,7 +14,7 @@ set(SOURCES_STAGE
 
 add_executable( a4test ${SOURCES_STAGE} )
 
-target_link_libraries( a4test ${CONAN_LIBS} )
+target_link_libraries( a4test ${CONAN_LIBS} -pthread )
 
 set_target_properties(a4test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
 
