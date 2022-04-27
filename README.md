@@ -13,8 +13,14 @@ Here is code snippets that build working parser on your platform.
 
 (assuming Gcc (or Similar) toolchain is already installed.)
 
+If you are using first time conan please first use:
 ~~~
 pip install conan
+conan profile new default --detect
+~~~
+
+Then:
+~~~
 git clone https://github.com/michalwidera/Antlr4ConanExample
 cd Antlr4ConanExample
 mkdir build
@@ -23,13 +29,6 @@ conan install .. -o antlr4=4.10.1
 conan build ..
 a4test
 ~~~
-
-If you are using first time conan please use:
-~~~
-conan profile new default --detect
-~~~
-
-To create and fill default conan profile.
 
 If you want to change used Antlr4 version - just use: '-o antlr4=4.9.3' or '-o antlr4= 4.10' as you need.
 
