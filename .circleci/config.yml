@@ -1,0 +1,26 @@
+version: 2.1
+jobs:
+
+  build-stable:
+    working_directory: ~
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get -y install gcc cmake make build-essential python3 python3-pip
+      - run: pip install conan
+      - run: conan profile new default --detect && conan profile update settings.compiler.libcxx=libstdc++11 default
+      - run: mkdir build && cd build && conan install .. -o antlr4=4.11.1
+      - run: cd build && conan build ..
+      - run: cd build && a4test
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build-stable:
+          filters:
+            branches:
+              only:
+                 - master
+                 - /issue_.*/
