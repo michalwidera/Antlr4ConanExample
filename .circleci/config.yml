@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: uname -a && cat /proc/version && cat /etc/issue
-      - run: sudo apt-get update && sudo apt-get -y install gcc cmake make build-essential python3 python3-pip default-jre default-jdk
+      - run: sudo apt-get update && sudo apt-get -y install gcc cmake make build-essential python3 python3-pip default-jre
       - run: pip install conan
       - run: conan profile new default --detect && conan profile update settings.compiler.libcxx=libstdc++11 default
       - run: cd build && conan source ..
