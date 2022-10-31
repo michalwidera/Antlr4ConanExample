@@ -1,21 +1,42 @@
-version: 2
+version: 2.1
 jobs:
+
   build-stable:
+    working_directory: ~
     docker:
-    - image: cimg/base:stable
+      - image: cimg/base:stable
     steps:
-    - checkout
-    - run:
-        command: sudo apt-get update && sudo apt-get -y install gcc cmake make build-essential python3 python3-pip
-    - run:
-        command: pip install conan
-    - run:
-        command: conan profile new default --detect && conan profile update settings.compiler.libcxx=libstdc++11 default
-    - run:
-        command: mkdir build && cd build && conan install .. -o antlr4=4.11.1
-    - run:
-        command: cd build && conan build ..
-    - run:
-        command: cd build && a4test
+      - checkout
+      - run: uname -a && cat /proc/version && cat /etc/issue
+      - run: sudo apt-get update && sudo apt-get -y install gcc cmake make build-essential python3 python3-pip
+      - run: pip install conan
+      - run: conan profile new default --detect && conan profile update settings.compiler.libcxx=libstdc++11 default
+      - run: cd build && conan source ..
+      - run: cd build && conan install ..
+      - run: cd Src && source regenerate_parser.sh
+      - run: cd build && conan build ..
+      - run: cd build && a4test
+
 workflows:
   version: 2
+  commit:
+    jobs:
+      - build-stable:
+          filters:
+            branches:
+              only:
+                 - master
+                 - /issue_.*/
+
+  nightly:
+    triggers:
+      - schedule:
+          # https://crontab.guru/#0_1_*_*_3
+          cron: "0 1 * * 1,6"
+          filters:
+            branches:
+              only:
+                - master
+                - /issue_.*/
+    jobs:
+      - build-stable

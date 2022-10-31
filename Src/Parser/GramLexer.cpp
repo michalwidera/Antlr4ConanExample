@@ -1,5 +1,5 @@
 
-// Generated from Gram.g4 by ANTLR 4.10.1
+// Generated from Gram.g4 by ANTLR 4.11.1
 
 
 #include "GramLexer.h"
@@ -41,7 +41,7 @@ struct GramLexerStaticData final {
   std::unique_ptr<antlr4::atn::ATN> atn;
 };
 
-std::once_flag gramlexerLexerOnceFlag;
+::antlr4::internal::OnceFlag gramlexerLexerOnceFlag;
 GramLexerStaticData *gramlexerLexerStaticData = nullptr;
 
 void gramlexerLexerInitialize() {
@@ -133,5 +133,5 @@ const atn::ATN& GramLexer::getATN() const {
 
 
 void GramLexer::initialize() {
-  std::call_once(gramlexerLexerOnceFlag, gramlexerLexerInitialize);
+  ::antlr4::internal::call_once(gramlexerLexerOnceFlag, gramlexerLexerInitialize);
 }

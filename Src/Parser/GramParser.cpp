@@ -1,5 +1,5 @@
 
-// Generated from Gram.g4 by ANTLR 4.10.1
+// Generated from Gram.g4 by ANTLR 4.11.1
 
 
 
@@ -35,7 +35,7 @@ struct GramParserStaticData final {
   std::unique_ptr<antlr4::atn::ATN> atn;
 };
 
-std::once_flag gramParserOnceFlag;
+::antlr4::internal::OnceFlag gramParserOnceFlag;
 GramParserStaticData *gramParserStaticData = nullptr;
 
 void gramParserInitialize() {
@@ -344,5 +344,5 @@ bool GramParser::exprSempred(ExprContext *_localctx, size_t predicateIndex) {
 }
 
 void GramParser::initialize() {
-  std::call_once(gramParserOnceFlag, gramParserInitialize);
+  ::antlr4::internal::call_once(gramParserOnceFlag, gramParserInitialize);
 }

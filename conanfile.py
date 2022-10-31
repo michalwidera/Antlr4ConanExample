@@ -27,7 +27,7 @@ class AntLR4Example(ConanFile):
     testing = []
 
     options = {
-        "antlr4" : ["4.9.3","4.10","4.10.1","4.11.1"]
+        "antlr4" : ["4.9.3","4.10.1","4.11.1"]
     }
 
     default_options = {
