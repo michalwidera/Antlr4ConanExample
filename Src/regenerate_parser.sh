@@ -11,4 +11,4 @@ alias grun="java org.antlr.v4.gui.TestRig"
 cd ~/.local/bin && [ ! -f "antlr-4.11.1-complete.jar" ] && wget https://www.antlr.org/download/antlr-4.11.1-complete.jar
 cd -
 
-antlr4 -o Parser -no-listener -no-visitor -Dlanguage=Cpp Gram.g4
+java -jar ~/.local/bin/antlr-4.11.1-complete.jar -o Parser -no-listener -no-visitor -Dlanguage=Cpp Gram.g4
