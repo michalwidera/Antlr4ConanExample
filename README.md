@@ -37,6 +37,7 @@ If you want to change used Antlr4 version - just use: '-o antlr4=4.9.3' or '-o a
 (Assumed that build step have been already done and Java is already installed.)
 
 ~~~
+sudo apt install default-jre
 cd Antlr4ConanExample/Src
 source regenerate_parser.sh
 cd ../build
