@@ -38,6 +38,8 @@ If you want to change used Antlr4 version - just use: '-o antlr4=4.9.3' or '-o a
 DO NOT FORGET INSTALL JAVA-JRE.
 Antl4 is written in Java Language, you need Java Runtime Environment to run Antlr4 on your machine.
 Check .circleci scripts to get more info if needed.
+This java compiler is only required when you need to compile .g4 file.
+Otherwise cpp-toll chain and generated code from Antlr4 will be enough.
 
 ~~~
 sudo apt install default-jre
@@ -47,3 +49,10 @@ cd ../build
 conan build ..
 a4test
 ~~~
+
+## How to ...
+
+There is a .circleci script.
+
+If you want to see how build this code from scrach on clean system - look at the script.
+There is all builded from scratch.
