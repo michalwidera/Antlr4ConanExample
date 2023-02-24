@@ -1,4 +1,5 @@
-from conans import ConanFile, CMake
+from conan import ConanFile
+from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 
 script = """#!/bin/bash
 
@@ -17,39 +18,27 @@ java -jar ~/.local/bin/antlr-VERSION-complete.jar -o Parser -no-listener -no-vis
 """
 
 class AntLR4Example(ConanFile):
-    settings = "os", "compiler", "build_type", "arch", "cppstd"
-    requires = ["cmake/3.21.3"]
+    settings = "os", "compiler", "build_type", "arch"
     license = "MIT"
     author = "Michal Widera"
     description = "ANTLR4 example"
     homepage = "https://github.com/michalwidera/Antlr4ConanExample"
-    generators = "cmake" , "cmake_find_package"
+    generators = "CMakeDeps" , "CMakeToolchain"
     testing = []
+    requires = "antlr4-cppruntime/4.11.1"
 
-    options = {
-        "antlr4" : ["4.9.3","4.10.1","4.11.1"]
-    }
-
-    default_options = {
-        "antlr4": "4.11.1"
-    }
-
-    def configure(self):
-        self.settings.compiler.cppstd = 20
-        self.settings.compiler.libcxx = "libstdc++11"
+    def layout(self):
+        cmake_layout(self)
 
     def package_info(self):
         self.cpp_info.system_libs = ["dl", "rt", "pthread"]
 
     def requirements(self):
-        antlr4_version_file = open("../Src/regenerate_parser.sh","w")
-        antlr4_version_file.write(script.replace('VERSION',str(self.options.antlr4)))
+        antlr4_version_file = open("src/regenerate_parser.sh","w")
+        antlr4_version_file.write(script.replace('VERSION',"4.11.1"))
         antlr4_version_file.close()
-
-        self.requires("antlr4-cppruntime/"+str(self.options.antlr4))
 
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        cmake.install()
