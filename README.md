@@ -71,3 +71,5 @@ There is all builded from scratch.
 
 Last change: I've modified conanfile.py to be compatible with conan 2.0 format.
 Currently I've checked it with conan 1.59 and 2.0 - this script is compatible with both of them.
+I've removed build folder as well from this repository - currently this is created by conan generator.
+

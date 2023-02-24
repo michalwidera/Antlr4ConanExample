@@ -14,8 +14,8 @@ jobs:
       - run: conan source .
       - run: conan install .
       - run: cd src && source regenerate_parser.sh
-      - run: cd build && conan build ..
-      - run: cd build && a4test
+      - run: conan build .
+      - run: a4test
 
 workflows:
   version: 2
