@@ -17,6 +17,12 @@ set(SOURCES_STAGE
 
 add_executable( a4test ${SOURCES_STAGE} )
 
+add_custom_target(
+  grammar
+  COMMAND ${CMAKE_SOURCE_DIR}/src/regenerate_parser.sh Gram.g4
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src
+  SOURCES ${PROJECT_SOURCE_DIR}/src/Gram.g4)
+
 target_link_libraries( a4test ${CONAN_LIBS} ${antlr4-runtime_LIBRARIES} -pthread )
 
 set_target_properties(a4test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)

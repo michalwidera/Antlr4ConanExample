@@ -24,8 +24,9 @@ class AntLR4Example(ConanFile):
     description = "ANTLR4 example"
     homepage = "https://github.com/michalwidera/Antlr4ConanExample"
     generators = "CMakeDeps" , "CMakeToolchain"
+    antlr4_version = "4.12.0"
     testing = []
-    requires = "antlr4-cppruntime/4.12.0"
+    requires = "antlr4-cppruntime/"+antlr4_version
 
     def layout(self):
         cmake_layout(self)
@@ -35,7 +36,7 @@ class AntLR4Example(ConanFile):
 
     def requirements(self):
         antlr4_version_file = open("src/regenerate_parser.sh","w")
-        antlr4_version_file.write(script.replace('VERSION',"4.12.0"))
+        antlr4_version_file.write(script.replace('VERSION',self.antlr4_version))
         antlr4_version_file.close()
 
     def build(self):
