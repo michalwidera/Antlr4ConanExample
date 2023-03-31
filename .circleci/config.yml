@@ -4,7 +4,8 @@ jobs:
   build-stable:
     working_directory: ~
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:edge-22.04
+    resource_class: large
     steps:
       - checkout
       - run: uname -a && cat /proc/version && cat /etc/issue
