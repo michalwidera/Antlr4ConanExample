@@ -3,8 +3,8 @@ jobs:
 
   build-stable:
     working_directory: ~
-    docker:
-      - image: cimg/base:edge-22.04
+    machine:
+      image: ubuntu-2204:current
     resource_class: large
     steps:
       - checkout
