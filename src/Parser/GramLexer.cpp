@@ -1,5 +1,5 @@
 
-// Generated from Gram.g4 by ANTLR 4.12.0
+// Generated from Gram.g4 by ANTLR 4.13.1
 
 
 #include "GramLexer.h"
@@ -42,10 +42,19 @@ struct GramLexerStaticData final {
 };
 
 ::antlr4::internal::OnceFlag gramlexerLexerOnceFlag;
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+static thread_local
+#endif
 GramLexerStaticData *gramlexerLexerStaticData = nullptr;
 
 void gramlexerLexerInitialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  if (gramlexerLexerStaticData != nullptr) {
+    return;
+  }
+#else
   assert(gramlexerLexerStaticData == nullptr);
+#endif
   auto staticData = std::make_unique<GramLexerStaticData>(
     std::vector<std::string>{
       "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "NEWLINE", "INT"
@@ -133,5 +142,9 @@ const atn::ATN& GramLexer::getATN() const {
 
 
 void GramLexer::initialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  gramlexerLexerInitialize();
+#else
   ::antlr4::internal::call_once(gramlexerLexerOnceFlag, gramlexerLexerInitialize);
+#endif
 }
