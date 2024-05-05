@@ -16,7 +16,7 @@ jobs:
       - run: conan source .
       - run: conan install . -s build_type=Debug --build missing
       - run: conan build . -s build_type=Debug --build missing
-      - run: cd build/Debug & make grammar
+      - run: make grammar
       - run: cd build/Debug & cmake .
       - run: cd build/Debug & make
       - run: ./build/Debug/a4test
