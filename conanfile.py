@@ -12,7 +12,7 @@ class AntLR4Example(ConanFile):
     generators = ("CMakeToolchain","CMakeDeps")
 
     requires = (
-        "antlr4-cppruntime/4.13.1",
+        "antlr4-cppruntime/4.13.2",
         "antlr4/4.13.1",
         "openjdk/21.0.1",
     )
